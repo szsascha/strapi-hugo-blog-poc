@@ -19,7 +19,9 @@
 ### Hugo ###
 # Generated files by hugo
 /frontend/public/
+/frontend/remote/public/
 /frontend/resources/_gen/
+/frontend/remote/resources/_gen/
 /frontend/assets/jsconfig.json
 hugo_stats.json
 
@@ -30,6 +32,7 @@ hugo.linux
 
 # Temporary lock file while building
 /frontend/.hugo_build.lock
+/frontend/remote/.hugo_build.lock
 
 ### Strapi ###
 

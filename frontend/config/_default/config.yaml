@@ -1,0 +1,6 @@
+module:
+  mounts:
+  - source: content
+    target: content
+  - source: remote/public/articles
+    target: content/articles

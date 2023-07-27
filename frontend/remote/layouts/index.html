@@ -1,0 +1,30 @@
+{{ $article_url := print (os.Getenv "HUGO_BACKEND_API_BASE_URL") "/articles?populate=blocks" }}
+{{ $authorization_token_string := print "Bearer " (os.Getenv "HUGO_BACKEND_API_TOKEN") }}
+
+{{ with resources.GetRemote $article_url (dict "headers" (dict "Authorization" $authorization_token_string )) }}
+  {{ $articles := unmarshal .Content }}
+  {{ $body_scratch := newScratch }}
+  {{ $body_scratch.Set "body" "n/a" }}
+  {{ range $articles.data }}
+    {{ range .attributes.blocks }}
+      {{ if in .__component "shared.rich-text" }}
+        {{ $body_scratch.Set "body" .body }}
+      {{ end }}
+    {{ end }}
+    {{
+      $article := dict
+        "title" .attributes.title
+        "slug" .attributes.slug
+        "date" .attributes.createdAt
+        "publishDate" .attributes.publishedAt
+        "lastmod" .attributes.updatedAt
+        "description" .attributes.description
+        "content" ($body_scratch.Get "body")
+    }}
+    {{ $filename := printf "articles/%s.md" (urlize $article.title) }} 
+    {{ $yaml_template := resources.Get "article.yaml" }}
+    {{ $file := $yaml_template | resources.ExecuteAsTemplate $filename $article }}
+    {{ $output := $file.RelPermalink }}
+  {{ end }}
+{{ end }}
+
