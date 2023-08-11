@@ -15,7 +15,7 @@ In the past I've created several blogs and websites with Wordpress. It was my go
 
 ## Run
 1. `yarn develop` from the backend directory
-2. Add the strapi api base url as environment variable, like `export HUGO_BACKEND_API_BASE_URL=http://localhost:1337/api``
+2. Add the strapi api base url as environment variable, like `export HUGO_BACKEND_API_BASE_URL=http://localhost:1337/api`
 3. Generate an strapi api token and add it as environment variable, like `export HUGO_BACKEND_API_TOKEN=1f40fc92da241694750979ee6cf582f2d5d7d28e18335de05abc54d0560e0f5302860c652bf08d560252aa5e74210546f369fbbbce8c12cfc7957b2652fe9a75`
 4. `hugo -s remote --ignoreCache && hugo server` from the frontend directory
 
